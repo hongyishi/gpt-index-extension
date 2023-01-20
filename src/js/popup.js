@@ -1,6 +1,10 @@
 window.onload = function () {
     document.getElementById("index-button").addEventListener("click", indexWebPage);
     document.getElementById("query-button").addEventListener("click", sendQuery);
+    chrome.storage.local.get(["query_response"]).then((result) => {
+        console.log("Value currently is " + result.query_response);
+        document.getElementById("query-results").innerHTML = result.query_response;
+      });
 }
 
 // index web page
@@ -8,7 +12,7 @@ function indexWebPage() {
     console.log("index web page");
 
     // // Get user's OpenAI API key
-    // var apiKey = document.getElementById("api-key-input").value;
+    var apiKey = document.getElementById("api-key-input").value;
     // if (apiKey == "") {
     //     alert("Please enter your OpenAI API key");
     //     return;
@@ -24,7 +28,7 @@ function indexWebPage() {
             type: "POST",
             data: JSON.stringify({
                 url: currentUrl,
-                // apiKey: apiKey
+                apiKey: apiKey
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -40,7 +44,7 @@ function indexWebPage() {
                         type: "POST",
                         data: JSON.stringify({
                             url: currentUrl,
-                            // apiKey: apiKey
+                            apiKey: apiKey
                         }),
                         headers: {
                             "Content-Type": "application/json"
@@ -73,7 +77,7 @@ function sendQuery() {
     console.log("send query");
 
     // Get user's OpenAI API key
-    // var apiKey = document.getElementById("api-key-input").value;
+    var apiKey = document.getElementById("api-key-input").value;
     // if (apiKey == "") {
     //     alert("Please enter your OpenAI API key");
     //     return;
@@ -91,7 +95,7 @@ function sendQuery() {
             data: JSON.stringify({
                 url: currentUrl,
                 query: query,
-                // apiKey: apiKey
+                apiKey: apiKey
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -100,6 +104,10 @@ function sendQuery() {
                 console.log("query success response: " + response);
                 // Display query results
                 document.getElementById("query-results").innerHTML = response;
+                chrome.storage.local.set({ query_response: response }).then(() => {
+                    console.log("Value is set to " + response);
+                  });
+                  
             },
             error: function (error) {
                 alert("Error querying indexed web page, please try again.");
