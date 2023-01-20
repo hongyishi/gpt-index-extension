@@ -7,12 +7,12 @@ window.onload = function () {
 function indexWebPage() {
     console.log("index web page");
 
-    // Get user's OpenAI API key
-    var apiKey = document.getElementById("api-key-input").value;
-    if (apiKey == "") {
-        alert("Please enter your OpenAI API key");
-        return;
-    }
+    // // Get user's OpenAI API key
+    // var apiKey = document.getElementById("api-key-input").value;
+    // if (apiKey == "") {
+    //     alert("Please enter your OpenAI API key");
+    //     return;
+    // }
     (async () => {
         const response = await chrome.runtime.sendMessage({ request: "url" });
         // do something with response here, not outside the function
@@ -24,7 +24,7 @@ function indexWebPage() {
             type: "POST",
             data: JSON.stringify({
                 url: currentUrl,
-                apiKey: apiKey
+                // apiKey: apiKey
             }),
             headers: {
                 "Content-Type": "application/json"
@@ -40,7 +40,7 @@ function indexWebPage() {
                         type: "POST",
                         data: JSON.stringify({
                             url: currentUrl,
-                            apiKey: apiKey
+                            // apiKey: apiKey
                         }),
                         headers: {
                             "Content-Type": "application/json"
@@ -73,11 +73,11 @@ function sendQuery() {
     console.log("send query");
 
     // Get user's OpenAI API key
-    var apiKey = document.getElementById("api-key-input").value;
-    if (apiKey == "") {
-        alert("Please enter your OpenAI API key");
-        return;
-    }
+    // var apiKey = document.getElementById("api-key-input").value;
+    // if (apiKey == "") {
+    //     alert("Please enter your OpenAI API key");
+    //     return;
+    // }
     (async () => {
         const response = await chrome.runtime.sendMessage({ request: "url" });
         // do something with response here, not outside the function
@@ -91,7 +91,7 @@ function sendQuery() {
             data: JSON.stringify({
                 url: currentUrl,
                 query: query,
-                apiKey: apiKey
+                // apiKey: apiKey
             }),
             headers: {
                 "Content-Type": "application/json"
