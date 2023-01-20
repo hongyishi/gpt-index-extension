@@ -1,0 +1,24 @@
+{
+    "name": "GPT Index",
+    "manifest_version": 3,
+    "version": "0.1",
+    "description": "Call GPT Index server to index the current web page",
+    "permissions": [
+        "activeTab",
+        "storage",
+        "webRequest",
+        "tabs"
+    ],
+    "background": {
+      "service_worker": "src/js/background.js"
+    },
+    "host_permissions": [
+      "<all_urls>"
+     ],
+    "action": {
+        "default_popup": "src/html/popup.html",
+        "default_icon": {
+          "128": "src/icons/chat-128.png"
+        }
+    }
+  }
