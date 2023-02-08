@@ -7,11 +7,18 @@
         "activeTab",
         "storage",
         "webRequest",
-        "tabs"
+        "tabs",
+        "scripting"
     ],
     "background": {
       "service_worker": "src/js/background.js"
     },
+    "content_scripts": [{
+      "all_frames": true,
+      "run_at": "document_end",
+      "matches": ["<all_urls>"],
+      "js": ["src/js/highlight.js"]
+    }],
     "host_permissions": [
       "<all_urls>"
      ],
