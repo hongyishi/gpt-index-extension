@@ -30,7 +30,7 @@ function indexWebPage() {
         var currentUrl = response.response;
         // Send a request to the server to check if the web page has already been indexed
         $.ajax({
-            url: "http://127.0.0.1:5000/check-index",
+            url: "http://gptindexextensionserver-env.eba-ssmvy7mt.us-west-2.elasticbeanstalk.com/check-index",
             type: "POST",
             data: JSON.stringify({
                 url: currentUrl,
@@ -46,7 +46,7 @@ function indexWebPage() {
                 } else {
                     // Send request to index web page
                     $.ajax({
-                        url: "http://127.0.0.1:5000/index-webpage",
+                        url: "http://gptindexextensionserver-env.eba-ssmvy7mt.us-west-2.elasticbeanstalk.com/index-webpage",
                         type: "POST",
                         data: JSON.stringify({
                             url: currentUrl,
@@ -101,7 +101,7 @@ function sendQuery() {
         var query = document.getElementById("query-input").value;
         document.getElementById("query-results").innerHTML = "Querying...";
         $.ajax({
-            url: "http://127.0.0.1:5000/query",
+            url: "http://gptindexextensionserver-env.eba-ssmvy7mt.us-west-2.elasticbeanstalk.com/query",
             type: "POST",
             data: JSON.stringify({
                 url: currentUrl,
